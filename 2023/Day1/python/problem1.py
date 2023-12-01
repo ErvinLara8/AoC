@@ -66,7 +66,6 @@ def part_2():
         
         num_list.append(int(curr_num))
     
-    print(num_list)
     result = sum(num_list)
     print(result)
 
