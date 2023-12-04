@@ -1,7 +1,7 @@
 def part_1():
     # file_name = "testdata1.txt"
     file_name = "fulldata1.txt"
-    with open(f"/Users/elara/AoC/2023/Day2/python/{file_name}", 'r') as data_file: 
+    with open(f"{file_name}", 'r') as data_file: 
         data = data_file.read().splitlines()
     
     valid_game_ids = []
@@ -35,7 +35,7 @@ def part_1():
 def part_2():
     # file_name = "testdata1.txt"
     file_name = "fulldata2.txt"
-    with open(f"/Users/elara/AoC/2023/Day2/python/{file_name}", 'r') as data_file: 
+    with open(f"{file_name}", 'r') as data_file: 
         data = data_file.read().splitlines()
         
     powers = []
