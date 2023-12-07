@@ -15,21 +15,20 @@ class Card:
             "five_of_a_kind": 6,
         }
         self.card_levels = {
-                "A": 12,
-                "K": 11,
-                "Q": 10,
-                "J": 9,
-                "T": 8,
-                "9": 7,
-                "8": 6,
-                "7": 5,
-                "6": 4,
-                "5": 3,
-                "4": 2,
-                "3": 1,
-                "2": 0,
-                
-            }
+            "A": 12,
+            "K": 11,
+            "Q": 10,
+            "J": 9,
+            "T": 8,
+            "9": 7,
+            "8": 6,
+            "7": 5,
+            "6": 4,
+            "5": 3,
+            "4": 2,
+            "3": 1,
+            "2": 0,
+        }
         self._hand_type = self.get_my_hand_type()
 
     @property
@@ -84,32 +83,37 @@ class Card:
             return False
         else:
             for i in range(len(self.hand)):
-                if self.card_levels[self.hand[i]] > self.card_levels[other_hand.hand[i]]:
+                if (
+                    self.card_levels[self.hand[i]]
+                    > self.card_levels[other_hand.hand[i]]
+                ):
                     return True
-                elif self.card_levels[self.hand[i]] < self.card_levels[other_hand.hand[i]]:
+                elif (
+                    self.card_levels[self.hand[i]]
+                    < self.card_levels[other_hand.hand[i]]
+                ):
                     return False
-                
+
 
 class Card2(Card):
-
     def __init__(self, hand: str, bid: int) -> None:
         super().__init__(hand, bid)
         self.card_levels = {
-                "A": 12,
-                "K": 11,
-                "Q": 10,
-                "T": 9,
-                "9": 8,
-                "8": 7,
-                "7": 6,
-                "6": 5,
-                "5": 4,
-                "4": 3,
-                "3": 2,
-                "2": 1,
-                "J": 0,
-            }
-    
+            "A": 12,
+            "K": 11,
+            "Q": 10,
+            "T": 9,
+            "9": 8,
+            "8": 7,
+            "7": 6,
+            "6": 5,
+            "5": 4,
+            "4": 3,
+            "3": 2,
+            "2": 1,
+            "J": 0,
+        }
+
     def get_j_replacement(self) -> str:
         deep_copy = copy.deepcopy(self.hand).replace("J", "")
         for c in deep_copy:
@@ -119,15 +123,15 @@ class Card2(Card):
                 return c
             if deep_copy.count(c) == 2:
                 return c
-        
+
         deep_copy = copy.deepcopy(self.hand).replace("J", "")
         strongest_char = "J"
         for c in deep_copy:
             if self.card_levels[c] > self.card_levels[strongest_char]:
                 strongest_char = c
-        
+
         return strongest_char
-    
+
     def get_my_hand_type(self) -> int:
         j_replacement = self.get_j_replacement()
         deep_copy = copy.deepcopy(self.hand)
@@ -162,19 +166,8 @@ class Card2(Card):
             return self.hand_types["one_pair"]
 
         return self.hand_types["high_card"]
-    
-    def wins_against_hand(self, other_hand) -> bool:
-        if self.hand_type > other_hand.hand_type:
-            return True
-        elif self.hand_type < other_hand.hand_type:
-            return False
-        else:
-            for i in range(len(self.hand)):
-                if self.card_levels[self.hand[i]] > self.card_levels[other_hand.hand[i]]:
-                    return True
-                elif self.card_levels[self.hand[i]] < self.card_levels[other_hand.hand[i]]:
-                    return False
-    
+
+
 def quick_sort(cards: list) -> list:
     if len(cards) <= 1:
         return cards
@@ -184,6 +177,7 @@ def quick_sort(cards: list) -> list:
         right = [x for x in cards[1:] if not pivot.wins_against_hand(x)]
 
         return quick_sort(left) + [pivot] + quick_sort(right)
+
 
 def part_2():
     # file_name = "testData.txt"
@@ -197,15 +191,15 @@ def part_2():
         hand = line.split()[0]
         bid = int(line.split()[1])
         all_cards.append(Card2(hand, bid))
-        
+
     all_cards = quick_sort(all_cards)
 
     total_winnings = 0
     for i in range(len(all_cards)):
-        total_winnings += (i+1) * all_cards[i].bid
+        total_winnings += (i + 1) * all_cards[i].bid
 
     print(total_winnings)
-    
+
 
 def part_1():
     # file_name = "testData.txt"
@@ -224,7 +218,7 @@ def part_1():
 
     total_winnings = 0
     for i in range(len(all_cards)):
-        total_winnings += (i+1) * all_cards[i].bid
+        total_winnings += (i + 1) * all_cards[i].bid
 
     print(total_winnings)
 
