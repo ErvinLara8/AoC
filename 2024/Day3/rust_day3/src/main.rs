@@ -8,7 +8,7 @@ fn main() {
     let contents = fs::read_to_string(data)
         .expect("Should have been able to read the file");
 
-    // part1(&contents);
+    part1(&contents);
     part2(&contents);
 }
 
